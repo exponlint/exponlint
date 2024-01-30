@@ -45,7 +45,8 @@
 ###
 
 <br clear="both">
-![snake gif](https://github.com/exponlint/exponlint/blob/output/github-contribution-grid-snake.gif)
+
 
 
 ###
+![snake gif](https://github.com/exponlint/exponlint/blob/output/github-contribution-grid-snake.gif)
