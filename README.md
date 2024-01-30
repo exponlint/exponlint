@@ -44,6 +44,6 @@
 
 <br clear="both">
 
-<img src="https://raw.githubusercontent.com/maurodesouza/maurodesouza/output/snake.svg" alt="Snake animation" />
+<img src="[https://raw.githubusercontent.com/maurodesouza/maurodesouza/output/snake.svg](https://github.com/exponlint/exponlint/blob/main/.github/workflows/snake.yml)https://github.com/exponlint/exponlint/blob/main/.github/workflows/snake.yml" alt="Snake animation" />
 
 ###
