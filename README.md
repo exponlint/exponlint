@@ -49,4 +49,4 @@
 
 
 ###
-![snake gif](https://github.com/exponlint/exponlint/blob/output/github-contribution-grid-snake.gif)
+![github-contribution-grid-snake](https://github.com/exponlint/exponlint/blob/output/github-contribution-grid-snake.svg)
