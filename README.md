@@ -8,7 +8,7 @@
 
 ###
 
-###<img align="right" height="150" src="https://media1.tenor.com/m/tB9eg8-v8dYAAAAC/sufrir-el-increible-mundo-de-gumball.gif"  />
+
 
 ###
 
