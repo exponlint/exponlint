@@ -1,3 +1,5 @@
+name: Update Snake Game
+
 on:
   # run automatically every 24 hours
   schedule:
@@ -9,9 +11,7 @@ on:
   # run on every push on the main branch
   push:
     branches:
-    - main
-    
-   
+      - main
 
 jobs:
   generate:
@@ -19,6 +19,9 @@ jobs:
     timeout-minutes: 10
     
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       # Fetch contributions in 2024
       - name: Get contributions in 2024
         run: |
@@ -30,21 +33,24 @@ jobs:
         working-directory: ${{ github.workspace }}
 
       # Generate snake game animation for 2024
-      - name: generate github-contribution-grid-snake.svg
-        uses: Platane/snk/svg-only@v3
+      - name: Generate GitHub contribution grid snake
+        uses: Platane/snk@master
         with:
-          github_user_name: ${{ github.repository_owner }}
-          outputs: |
-            output/github-contribution-grid-snake.svg
-            output/github-contribution-grid-snake-dark.svg?palette=github-dark
+          github_user_name: exponlint
+          output: dist/github-contribution-grid-snake.svg
+          background_color: 'transparent'
+          border_radius: 0
+          commit_message: 'Updated GitHub contributions snake animation'
+          timezone: 'UTC'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
-      # Push the content of <build_dir> to a branch
-      - name: Push github-contribution-grid-snake.svg to the output branch
-        uses: crazy-max/ghaction-github-pages@v3.1.0
-        with:
-          target_branch: output
-          build_dir: output
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Push the content of dist folder to main branch
+      - name: Push changes
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@users.noreply.github.com'
+          git add dist/
+          git commit -m "Update snake game animation"
+          git push
+        working-directory: ${{ github.workspace }}
