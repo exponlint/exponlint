@@ -25,28 +25,33 @@ jobs:
           ./fetch_contributions.sh ${{ github.repository_owner }}
         working-directory: ${{ github.workspace }}
 
-      # Generate snake game animation for 2024
-      - name: Generate snake animation
+      # Update snake animation SVG with contributions data
+      - name: Update snake animation
         run: |
           ./update_snake_animation.sh input.svg contributions_2024.json output.svg
         working-directory: ${{ github.workspace }}
 
       # Generate snake game animation for 2024
-      - name: generate github-contribution-grid-snake.svg
-        uses: Platane/snk/svg-only@v3
-        with:
-          github_user_name: ${{ github.repository_owner }}
-          outputs: |
-            output/github-contribution-grid-snake.svg
-            output/github-contribution-grid-snake-dark.svg?palette=github-dark
+      - name: Generate snake game animation
+        run: |
+          npx snk --input output.svg --output output/github-contribution-grid-snake.svg
+          npx snk --input output.svg --output output/github-contribution-grid-snake-dark.svg --palette github-dark
+        working-directory: ${{ github.workspace }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       # Push the content of <build_dir> to a branch
-      - name: Push github-contribution-grid-snake.svg to the output branch
-        uses: crazy-max/ghaction-github-pages@v3.1.0
+      - name: Push output files to the output branch
+        uses: actions/checkout@v2
+      - name: Commit files
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add .
+          git commit -m "Update snake animation SVG with 2024 contributions"
+      - name: Push changes
+        uses: actions/github-script@0.10.0
         with:
-          target_branch: output
-          build_dir: output
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            git push
