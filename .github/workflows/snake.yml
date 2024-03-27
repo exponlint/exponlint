@@ -22,6 +22,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      # Create dist folder if it doesn't exist
+      - name: Create dist folder
+        run: mkdir -p dist
+        working-directory: ${{ github.workspace }}
+
       # Fetch contributions in 2024
       - name: Get contributions in 2024
         run: |
